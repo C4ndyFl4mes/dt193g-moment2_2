@@ -1,10 +1,9 @@
 const fastify = require("fastify")({logger: true});
 
-fastify.get("/", (request, reply) => {
-    reply.send({
-        hello: "world"
-    });
-});
+require('dotenv').config();
+
+fastify.register(require("./config/db"));
+fastify.register(require("./routes/item.route"));
 
 fastify.listen({ port: 5000 }, (error, address) => {
     if (error) {
