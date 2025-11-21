@@ -1,18 +1,24 @@
-const { getItemsOpts } = require("../models/item.model");
+const { getItemsOpts, postItemOpts, deleteItemOpts, updateItemOpts } = require("../models/item.model");
+const { getItems, addItem, deleteItem, updateItem } = require("../controllers/item.controller");
 
 async function routes (fastify, options) {
-    const collection = fastify.mongo.client.db(process.env.DATABASE).collection("items");
-
     fastify.get('/', async (request, reply) => {
         return { hello: 'world'};
     });
-    fastify.get('/items', getItemsOpts, async (request, reply) => {
-        const result = await collection.find().toArray();
-        if (result.length === 0) {
-            throw new Error("Inga dokument hittades!");
-        }
-        return result;
-    });
+
+    // Använder bind iställer för handler.
+
+    // Hämtar alla items. 
+    fastify.get('/items', getItemsOpts, getItems.bind(fastify));
+
+    // Lägger till ett item.
+    fastify.post('/item', postItemOpts, addItem.bind(fastify));
+
+    // Raderar ett item.
+    fastify.delete('item', deleteItemOpts, deleteItem.bind(fastify));
+
+    // Uppdaterar ett item.
+    fastify.put('/item', updateItemOpts, updateItem.bind(fastify));
 }
 
 module.exports = routes;
