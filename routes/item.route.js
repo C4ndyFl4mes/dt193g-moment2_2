@@ -15,7 +15,7 @@ async function routes (fastify, options) {
     fastify.post('/item', postItemOpts, addItem.bind(fastify));
 
     // Raderar ett item.
-    fastify.delete('item', deleteItemOpts, deleteItem.bind(fastify));
+    fastify.delete('/item', deleteItemOpts, deleteItem.bind(fastify));
 
     // Uppdaterar ett item.
     fastify.put('/item', updateItemOpts, updateItem.bind(fastify));
