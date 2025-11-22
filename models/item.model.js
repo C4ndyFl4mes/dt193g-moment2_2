@@ -60,6 +60,7 @@ const deleteItemOpts = {
 // Uppdatera item.
 const updateItemOpts = {
     schema: {
+        body: Item,
         response: {
             200: {
                 type: 'object',
