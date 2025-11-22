@@ -3,7 +3,7 @@ const Item = {
     type: 'object',
     required: ["name", "rating", "isDubbed"],
     properties: {
-        _id: { type: 'string' },
+        id: { type: 'string' },
         name: { type: 'string', minLength: 1, maxLength: 200 },
         rating: { type: 'number', minimum: 1, maximum: 10 },
         isDubbed: { type: 'boolean' }
@@ -25,8 +25,15 @@ const getItemsOpts = {
 // Lägga till item.
 const postItemOpts = {
     schema: {
+        body: Item,
         response: {
-            201: Item
+            201: {
+                type: 'object',
+                properties: {
+                    acknowledged: { type: 'boolean' },
+                    insertedId: { type: 'string' }
+                }
+            }
         }
     }
 };
@@ -35,7 +42,17 @@ const postItemOpts = {
 const deleteItemOpts = {
     schema: {
         response: {
-            200: Item
+            200: {
+                type: 'object',
+                properties: {
+                    acknowledged: {
+                        type: 'boolean'
+                    },
+                    deletedCount: {
+                        type: 'number'
+                    }
+                }
+            }
         }
     }
 };
@@ -44,7 +61,26 @@ const deleteItemOpts = {
 const updateItemOpts = {
     schema: {
         response: {
-            200: Item
+            200: {
+                type: 'object',
+                properties: {
+                    acknowledged: {
+                        type: 'boolean'
+                    },
+                    modifiedCount: {
+                        type: 'number'
+                    },
+                    upsertedId: {
+                        type: ['string', 'null']
+                    },
+                    upsertedCount: {
+                        type: 'number'
+                    },
+                    matchedCount: {
+                        type: 'number'
+                    }
+                }
+            }
         }
     }
 };

@@ -15,10 +15,10 @@ async function routes (fastify, options) {
     fastify.post('/item', postItemOpts, addItem.bind(fastify));
 
     // Raderar ett item.
-    fastify.delete('/item', deleteItemOpts, deleteItem.bind(fastify));
+    fastify.delete('/item/:id', deleteItemOpts, deleteItem.bind(fastify));
 
     // Uppdaterar ett item.
-    fastify.put('/item', updateItemOpts, updateItem.bind(fastify));
+    fastify.put('/item/:id', updateItemOpts, updateItem.bind(fastify));
 }
 
 module.exports = routes;
