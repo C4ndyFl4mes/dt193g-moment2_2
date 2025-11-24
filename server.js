@@ -10,7 +10,7 @@ fastify.register(require("@fastify/cors"), {
 fastify.register(require("./config/db"));
 fastify.register(require("./routes/item.route"));
 
-fastify.listen({ port: port }, (error, address) => {
+fastify.listen({ port: port, host: '0.0.0.0' }, (error, address) => {
     if (error) {
         fastify.log.error(error);
         process.exit(1);
