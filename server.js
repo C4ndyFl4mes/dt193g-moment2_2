@@ -1,5 +1,5 @@
 const fastify = require("fastify")({ logger: true });
-
+const port = process.env.PORT | 3000;
 require('dotenv').config();
 
 fastify.register(require("@fastify/cors"), {
@@ -10,7 +10,7 @@ fastify.register(require("@fastify/cors"), {
 fastify.register(require("./config/db"));
 fastify.register(require("./routes/item.route"));
 
-fastify.listen({ port: 3000 }, (error, address) => {
+fastify.listen({ port: port }, (error, address) => {
     if (error) {
         fastify.log.error(error);
         process.exit(1);
