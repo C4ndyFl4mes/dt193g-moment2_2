@@ -1,5 +1,6 @@
 const fastifyPlugin = require("fastify-plugin");
 
+// Ansluter till databas.
 async function connectDB(fastify, options) {
     try {
         await fastify.register(require("@fastify/mongodb"), {
