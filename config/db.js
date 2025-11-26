@@ -1,6 +1,6 @@
 const fastifyPlugin = require("fastify-plugin");
 
-// Ansluter till databas.
+// Ansluter till databas. Try-catch var till för att felsöka ett fel, men jag låter den vara kvar. Det ser coolare ut så här.
 async function connectDB(fastify, options) {
     try {
         await fastify.register(require("@fastify/mongodb"), {
@@ -16,7 +16,7 @@ async function connectDB(fastify, options) {
                 .collection("items");
         });
     } catch (error) {
-        fastify.log.error({ err }, "db plugin: failed to register @fastify/mongodb");
+        fastify.log.error({ error }, "db plugin: failed to register @fastify/mongodb");
         throw error;
     }
 }

@@ -5,7 +5,7 @@ require('dotenv').config();
 //Så att API:et kan kallas överallt.
 fastify.register(require("@fastify/cors"), {
     origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    methods: ["GET", "POST", "PUT", "DELETE"]
 });
 
 fastify.register(require("./config/db")); // Databasanslutningen
